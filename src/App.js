@@ -20,11 +20,8 @@ class BooksApp extends Component {
   
   updateBook = (book, shelf) => {
      
-      const books = this.state.books.map(b => {
-          if (b.id === book.id)
-              b.shelf = shelf
-          return b
-      })
+      const books = this.state.books
+      
       this.setState({ books })
       console.log(books)
 
