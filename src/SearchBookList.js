@@ -1,51 +1,32 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import DebounceInput from 'react-debounce-input'
-import * as BooksAPI from './BooksAPI'
+//import * as BooksAPI from './BooksAPI'
 
 
 
 
 class SearchBookList extends Component {
   
-     
-    state = {
-       
-        searchedBooks:[]
-    }
 
-    searchQuery = (event) => {
-        if (event.target.value !== '') {
-            BooksAPI.search(event.target.value).then(
-                searchedBooks => {
-                    this.setState({ searchedBooks })
-
-                    console.log(this.state.searchedBooks.length);
-                })
-           
-        }
-    }
 
     handleChange(book, event) {
         this.props.updateBook(book, event)
-        
+        console.log(event)
         
     }
 
     render() {
        
-        const {  searchedBooks } = this.state
-        
+        const {  searchedBooks } = this.props
+        const { searchQuery } = this.props
        
 
         return (
             <div className="app">
                 <div className="search-books">
                     <div className="search-books-bar">
-                        <Link
-                            to='/'
-                            className="close-search"
-                        >Close</Link>
+                        <a href="/" className="close-search"> Close </a> 
                         <div className="search-books-input-wrapper">
                             {/* 
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -60,14 +41,14 @@ class SearchBookList extends Component {
                                 element="input"
                                 type="text"
                                 placeholder="Search by title or author"
-                                value={this.state.searchedBooks.string}
-                                onChange={this.searchQuery}
+                                value={searchedBooks.string}
+                                onChange={searchQuery}
                             />
 
                         </div>
                     </div>
                     <div className="search-books-results">
-                        {this.state.searchedBooks !== undefined && (
+                        {searchedBooks !== undefined && (
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
                                     {searchedBooks.map(book =>
@@ -78,12 +59,12 @@ class SearchBookList extends Component {
                                                     >
                                                     </div>
                                                     <div className="book-shelf-changer">
-                                                        <select value={book.shelf}  onChange={(event) => this.handleChange(book, event.target.value)} >
+                                                        <select value={book.shelf || ""} onChange={(event) => this.handleChange(book, event.target.value)}  >
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
                                                             <option value="read">Read</option>
-                                                            <option value="none">None</option>
+                                                            <option value=" ">None</option>
                                                         </select>
                                                     </div>
                                                 </div>
