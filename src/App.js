@@ -97,25 +97,27 @@ class BooksApp extends Component {
                           <div className="list-books-title">
                               <h1>MyReads</h1>
                           </div>
-                          < BookShelf
-                              title='Currently Reading'
-                              updateBook={this.updateBook}                    
-                              books={books.filter((book) => book.shelf === 'currentlyReading')}
-                              searchedBooks={searchedBooks}
-                      />
-                      < BookShelf
-                              title='Wants To Read'
-                              updateBook={this.updateBook}
-                              books={books.filter((book) => book.shelf === 'wantToRead')}
-                              searchedBooks={searchedBooks}
-                      />
-                      < BookShelf
-                              title='Read'
-                              updateBook={this.updateBook}
-                              books={books.filter((book) => book.shelf === 'read')}
-                              searchedBooks={searchedBooks}
-                      />
-                          </div>
+                          {books.map(book =>
+                              <BookShelf
+                                  title='Currently Reading'
+                                  updateBook={this.updateBook}
+                                  books={books.filter((book) => book.shelf === 'currentlyReading')}
+                                  searchedBooks={searchedBooks}
+                              />
+                             
+                              <BookShelf
+                                  title='Wants To Read'
+                                  updateBook={this.updateBook}
+                                  books={books.filter((book) => book.shelf === 'wantToRead')}
+                                  searchedBooks={searchedBooks}
+                              />
+                              <BookShelf
+                                  title='Read'
+                                  updateBook={this.updateBook}
+                                  books={books.filter((book) => book.shelf === 'read')}
+                                  searchedBooks={searchedBooks}
+                              />
+                       )}   </div> 
                   </div>
               ) } />
               <Route path='/search' render={() => (
