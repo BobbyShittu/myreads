@@ -97,7 +97,6 @@ class BooksApp extends Component {
                           <div className="list-books-title">
                               <h1>MyReads</h1>
                           </div>
-                          {books.map(book =>
                               <BookShelf
                                   title='Currently Reading'
                                   updateBook={this.updateBook}
@@ -117,7 +116,7 @@ class BooksApp extends Component {
                                   books={books.filter((book) => book.shelf === 'read')}
                                   searchedBooks={searchedBooks}
                               />
-                       )}   </div> 
+                         </div> 
                   </div>
               ) } />
               <Route path='/search' render={() => (
